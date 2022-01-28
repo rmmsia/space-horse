@@ -7,3 +7,5 @@ And that some craft-only artifacts can be brought back too, but are exceedingly 
 
 
 This also is my first foray into object-oriented programming with Python. Sorry if it's a little messy.
+
+Not affiliated with Auxbrain. Nor is this reflective of actual drop rates in the Egg, Inc. game. This is only for fun.
