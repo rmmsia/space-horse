@@ -52,7 +52,7 @@ class Cube(Artifact): # Puzzle Cube
             self.artTier = "T2"
 
 
-class Totem(Artifact):
+class Totem(Artifact): # Lunar Totem
 
     def incRare(self):
         rareRoll = random.randint(1, 1000)
@@ -78,7 +78,7 @@ class Totem(Artifact):
             self.artTier = "T2"
 
 
-class DemetersNecklace(Artifact):
+class DemetersNecklace(Artifact): # Demeters Necklace
 
     def incRare(self):
         rareRoll = random.randint(1, 1000)
@@ -108,7 +108,7 @@ class DemetersNecklace(Artifact):
             self.artTier = "T2"
 
 
-class Vial(Artifact):
+class Vial(Artifact): # Vial of Martian Dust
 
     def incRare(self):
         rareRoll = random.randint(1, 1000)
@@ -134,7 +134,7 @@ class Vial(Artifact):
             self.artTier = "T2"
 
 
-class Brooch(Artifact):
+class Brooch(Artifact): # Aurelian Brooch
 
     def incRare(self):
         rareRoll = random.randint(1, 1000)
@@ -160,7 +160,7 @@ class Brooch(Artifact):
         elif 35 < tierRoll <= 65:
             self.artTier = "T2"
 
-class Ankh(Artifact):
+class Ankh(Artifact): # Tungsten Ankh
 
     def incRare(self):
         rareRoll = random.randint(1, 1000)
@@ -187,7 +187,7 @@ class Ankh(Artifact):
         elif 25 < tierRoll <= 60:
             self.artTier = "T2"
 
-class Gusset(Artifact):
+class Gusset(Artifact): # Gusset
 
     def incRare(self):
         rareRoll = random.randint(1, 1000)
@@ -212,7 +212,7 @@ class Gusset(Artifact):
         elif 30 < tierRoll <= 65:
             self.artTier = "T2"
 
-class Medallion(Artifact):
+class Medallion(Artifact): # Neodymium Medallion
 
     def incRare(self):
         rareRoll = random.randint(1, 1000)
@@ -239,7 +239,7 @@ class Medallion(Artifact):
         elif 40 < tierRoll <= 70:
             self.artTier = "T2"
 
-class Lens(Artifact):
+class Lens(Artifact): # Mercury's Lens
 
     def incRare(self):
         rareRoll = random.randint(1, 1000)
@@ -268,7 +268,7 @@ class Lens(Artifact):
         elif 30 < tierRoll <= 65:
             self.artTier = "T2"
 
-class Beak(Artifact):
+class Beak(Artifact): # Beak of Midas
 
     def incRare(self):
         rareRoll = random.randint(1, 1000)
@@ -290,7 +290,7 @@ class Beak(Artifact):
         elif 30 < tierRoll <= 60:
             self.artTier = "T2"
 
-class Rainstick(Artifact):
+class Rainstick(Artifact): # Carved Rainstick
 
     def incRare(self):
         rareRoll = random.randint(1, 1000)
@@ -309,7 +309,7 @@ class Rainstick(Artifact):
         elif 40 < tierRoll <= 70:
             self.artTier = "T2"
 
-class Compass(Artifact):
+class Compass(Artifact): # Interstellar Compass
 
     def incRare(self):
         rareRoll = random.randint(1, 1000)
@@ -382,7 +382,7 @@ class Feather(Artifact): # Phoenix Feather
         elif 40 < tierRoll <= 75:
             self.artTier = "T2"
 
-class Metronome(Artifact):
+class Metronome(Artifact): # Quantum Metronome
 
     def incRare(self):
         rareRoll = random.randint(1, 1000)
@@ -411,7 +411,7 @@ class Metronome(Artifact):
         elif 40 < tierRoll <= 75:
             self.artTier = "T2"
 
-class Monocle(Artifact):
+class Monocle(Artifact): # Dilithium Monocle
 
     def incRare(self):
         rareRoll = random.randint(1, 1000)
@@ -452,7 +452,7 @@ class XD(Artifact): # haha actuator bad
         elif 45 < tierRoll <= 75:
             self.artTier = "T2"
 
-class SiaB(Artifact):
+class SiaB(Artifact): # Ship in a Bottle
 
     def incRare(self):
         rareRoll = random.randint(1, 1000)
@@ -476,7 +476,7 @@ class SiaB(Artifact):
         elif 45 < tierRoll <= 75:
             self.artTier = "T2"
 
-class Deflector(Artifact):
+class Deflector(Artifact): # Tachyon Deflector
 
     def incRare(self):
         rareRoll = random.randint(1, 1000)
@@ -500,7 +500,7 @@ class Deflector(Artifact):
         elif 45 < tierRoll <= 75:
             self.artTier = "T2"
 
-class Basan(Artifact):
+class Basan(Artifact): # Book of Basan
 
     def incRare(self):
         rareRoll = random.randint(1, 1000)
@@ -522,7 +522,7 @@ class Basan(Artifact):
         elif 60 < tierRoll <= 85:
             self.artTier = "T2"
 
-class LoE(Artifact):
+class LoE(Artifact): # Light of Eggendil
 
     def incRare(self):
         rareRoll = random.randint(1, 1000)
