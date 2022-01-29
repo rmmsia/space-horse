@@ -596,4 +596,4 @@ chosenArt = random.choice(var_list)
 chosenArt.incTier() # Pray it's T4
 chosenArt.incRare() # Pray it's Legendary
 
-print(f"Congratulations! Horse returned with a {chosenArt.artTitle()}!") # Welcome back to earth, Horse.
+returnMessage = f"Congratulations! Horse returned with a {chosenArt.artTitle()}!" # Welcome back to earth, Horse.
