@@ -1,6 +1,8 @@
 from flask import Flask
 from threading import Thread
 
+# Keeps the bot awake. Receives pings from UptimeRobot
+
 app = Flask('')
 
 @app.route('/')
