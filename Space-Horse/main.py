@@ -9,7 +9,7 @@ bot = commands.Bot(command_prefix="!")
 # Startup things...
 @bot.event
 async def on_ready():
-  await bot.change_presence(activity=discord.Game(name="$yeet"))
+  await bot.change_presence(activity=discord.Game(name="!yeet"))
   print("Space Horse Online. {0.user}".format(bot))
 
 # Cog loading
@@ -24,6 +24,6 @@ if __name__ == '__main__':
     bot.load_extension(extension)
 
 
-
 keep_alive()
+
 bot.run(os.environ["TOKEN"])
