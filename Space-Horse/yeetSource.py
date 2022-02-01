@@ -1,5 +1,7 @@
 import random
 
+# DEPRECATED. REFER TO yeetSourceV2.py INSTEAD FOR NEWER ARTIFACT GENERATION CODE
+
 # Now, the mess of SPACE HORSE.py. I probably should define a function that returns the generated item, but I guess I can do that another day. My focus today (30/01/2021) is making sure the cogs work.
 
 

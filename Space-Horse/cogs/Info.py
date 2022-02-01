@@ -1,9 +1,6 @@
 import discord
-import json
-import os
+import random
 from discord.ext import commands
-
-
 
 class Info(commands.Cog):
 
@@ -12,7 +9,7 @@ class Info(commands.Cog):
   
   @commands.command()
   async def ping(self, ctx):
-    await ctx.channel.send(f"Pong!")
+    await ctx.channel.send(f"Pong! {round(self.bot.latency * 1000)} ms")
 
   @commands.command()
   async def botinfo(self, ctx):
@@ -25,7 +22,10 @@ class Info(commands.Cog):
     await ctx.channel.send("Lol")
 
   
-
-
+  @commands.command(name="pet", aliases=["p"])
+  async def pet(self, ctx):
+    petResponse = ['Neigh!', 'Neigh...', 'Neigh.', 'Neigh neigh neigh!', 'Neigh :D', 'Stop.']
+    await ctx.channel.send(random.choice(petResponse))
+  
 def setup(bot):
   bot.add_cog(Info(bot))
