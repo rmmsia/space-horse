@@ -2,43 +2,6 @@ import random
 import math
  
 def launch(currentMission):
-  # class Mission:
-      #def __init__(self, misName, minQual, maxQual):
-          #self.misName = misName
-          #self.minQual = minQual
-          #self.maxQual = maxQual
-
-      #def getMinQual(self):
-          #return self.minQual
-
-      #def getMaxQual(self):
-          #return self.maxQual
-
-  # Mission List
-
-  # mis01 = Mission('Commercial Flight Altitude', 0, 4) # 0 launches
-  # mis02 = Mission('Stratosphere', 1, 6) # 25 "
-  # mis03 = Mission('Kármán line', 2, 8) # 50 "
-  # mis04 = Mission('Low Earth Orbit', 3, 10) # 100 "
-  # mis05 = Mission('Geostationary Orbit', 4, 12) # 250 "
-  # mis06 = Mission('High Earth Orbit', 5, 14) # 500 "
-  # mis07 = Mission('Lunar Orbit', 6, 16) # 1000 "
-  # mis08 = Mission('L2 Orbit', 7, 18) # 2500 "
-
-  # misHyper = Mission('Hyperspace', 14, 20) # Special
-
-  # missionlist = {
-  #     'Commercial Flight Altitude': {'minQual': 0, 'maxQual': 4},
-  #     'Stratosphere': {'minQual': 1, 'maxQual': 6},
-  #     'Kármán Line': {'minQual': 2, 'maxQual': 8},
-  #     'Low Earth Orbit': {'minQual': 3, 'maxQual': 10},
-  #     'Geostationary Orbit': {'minQual': 4, 'maxQual': 12},
-  #     'High Earth Orbit': {'minQual': 5, 'maxQual': 14},
-  #     'Lunar Orbit': {'minQual': 6, 'maxQual': 16},
-  #     'L2 Orbit': {'minQual': 7, 'maxQual': 18},
-  #     'Hyperspace': {'minQual': 14, 'maxQual': 20}
-  #     }
-
 
   class Artifact:
       def __init__(self, artTier, artRare, artName, artSlots, artQuality, artChance):
