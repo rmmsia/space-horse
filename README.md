@@ -1,11 +1,15 @@
 # space-horse
-A small project that aims to simulate Egg Inc. rocket missions and artifact collection.
 
-Except it involves yeeting a (metaphorical) horse into space, and it brings back one artifact at a time.
+Space Horse is a Discord bot that simulates Egg Inc. rocket missions and artifact collection, except
+it involves yeeting a (metaphorical) horse into space, and it brings back one artifact at a time
+rather than collections of multiple artifacts like normal rocket missions in the game.
 
-And that some craft-only artifacts can be brought back too, but are exceedingly rare instead.
+Some artifacts that are typically obtained only from crafting also drop from Space Horse missions,
+but are exceedingly rare.
 
+## Disclaimer
+This project is not affiliated with Auxbrain, Inc. Nor is this reflective of actual drop rates in the Egg, Inc. game. This is only for fun.
+Furthermore, it goes without saying that this does not spawn actual artifacts in your Egg, Inc. game. This bot makes zero use of your
+game's Egg, Inc. ID.
 
-This also is my first foray into object-oriented programming with Python. Sorry if it's a little messy.
-
-Not affiliated with Auxbrain. Nor is this reflective of actual drop rates in the Egg, Inc. game. This is only for fun.
+Interested to see the bot in action? Join the Discord server here: https://discord.gg/WzQYXRZ9VF
