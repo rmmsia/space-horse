@@ -3,7 +3,7 @@ import random
 from pymongo import MongoClient
 from discord.ext import commands
 
-cluster = MongoClient("mongodb+srv://spacehorse:MzfF2JWiycVs2o@space-horse.sjxri.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+cluster = MongoClient(" ")
 
 horseyStats = cluster["shbot"]["stats"]
 
