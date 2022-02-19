@@ -3,7 +3,7 @@ import random
 from pymongo import MongoClient
 from discord.ext import commands
 
-cluster = MongoClient("<connection string>")
+cluster = MongoClient("mongodb+srv://spacehorse:MzfF2JWiycVs2o@space-horse.sjxri.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 
 horseyStats = cluster["shbot"]["stats"]
 
@@ -37,11 +37,11 @@ class Info(commands.Cog):
     id = ctx.message.author.id
     uStats = horseyStats.find_one({"id": id})
     tix = uStats["shiny tickets"]
-    # hseggs = uStats["hyperspace eggs"] - Coming soon
+    hseggs = uStats["hyperspace eggs"] 
 
     embed = discord.Embed(title = f"Special items of {ctx.message.author.name}")
     embed.add_field(name="Shiny Tickets", value=str(tix), inline = True)
-    # embed.add_field(name="Hyperspace Eggs", value=str(hseggs), inline = True) - Coming Soon
+    embed.add_field(name="Hyperspace Eggs", value=str(hseggs), inline = True)
     await ctx.send(embed = embed)
   
   @commands.command(name="prostats", aliases=["ps"])

@@ -1,10 +1,11 @@
 import discord
 import random
 import yeetSourceV2
+import yeetUtil
 from pymongo import MongoClient
 from discord.ext import commands
 
-cluster = MongoClient("<connection string>")
+cluster = MongoClient("mongodb+srv://spacehorse:MzfF2JWiycVs2o@space-horse.sjxri.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 
 horseyStats = cluster["shbot"]["stats"]
 
@@ -15,6 +16,8 @@ class YeetV2(commands.Cog):
   @commands.command(name = "stats", aliases = ["s"])
   async def stats(self, ctx):
     id = ctx.message.author.id
+
+    # Get user's stats from id
     uStats = horseyStats.find_one({"id": id})
     mission = uStats["mission"]
     launches = uStats["launches"]
@@ -39,6 +42,7 @@ class YeetV2(commands.Cog):
   async def yeet(self, ctx):
     id = ctx.message.author.id
     uStats = horseyStats.find_one({"id": id})
+    shinyMode = uStats["stmode"]
     if uStats is None: # creates new user stats for new user
       newuser = {
         "id": id,
@@ -49,14 +53,31 @@ class YeetV2(commands.Cog):
         "legendary": 0,
         "epic": 0,
         "rare": 0,
-        "prostats": "false"
+        "prostats": "false",
+        "hsmode": "false",
+        "stmode": "false"
         }
       horseyStats.insert_one(newuser)
       newEmbed = discord.Embed(title=f"Hi {ctx.message.author.name}!", description = "Welcome to Space Horse! To start, yeet Space Horse with `!yeet`!")
       await ctx.send(embed=newEmbed)
+      
     else: # yeets Horsey if user stats exist
       currentMission = uStats["mission"]
-      yeetReturn = yeetSourceV2.launch(currentMission) # Returns a tuple of 3 items
+      if shinyMode == "true":
+        # Update "shiny tickets" count (decreasing as it's spent)
+        newSTcount = uStats["shiny tickets"] - 1
+        horseyStats.update_one({"id":id}, {"$set":{"shiny tickets":newSTcount}})
+
+        # Exit shiny mode if newSTcount falls to zero.
+        if newSTcount == 0:
+          horseyStats.update_one({"id":id}, {"$set":{"stmode":"false"}})
+          await ctx.channel.send("You have run out of Shiny Tickets! Shiny Mode **OFF**.")
+        
+        # Shiny yeet!
+        yeetReturn = yeetSourceV2.shinylaunch(currentMission)
+
+      else: # If shiny mode is off, do a normal yeet.
+        yeetReturn = yeetSourceV2.launch(currentMission) # Returns a tuple of 3 items
 
       (launchresult, missionQual, poolSize) = yeetReturn # assigns each item a variable
   
@@ -93,31 +114,57 @@ class YeetV2(commands.Cog):
         shinyEmbed = discord.Embed(description="Horse found a **Shiny Ticket**!")
         await ctx.send(embed=shinyEmbed)
 
-      # Update current mission
-      if 0 <= newLaunchCount < 25:
-        newMission = "Commercial Flight Altitude"
-        horseyStats.update_one({"id":id}, {"$set":{"mission":newMission}})
-      if 25 <= newLaunchCount < 50:
-        newMission = "Stratosphere"
-        horseyStats.update_one({"id":id}, {"$set":{"mission":newMission}})
-      if 50 <= newLaunchCount < 100:
-        newMission = "Kármán Line"
-        horseyStats.update_one({"id":id}, {"$set":{"mission":newMission}})
-      if 100 <= newLaunchCount < 250:
-        newMission = "Low Earth Orbit"
-        horseyStats.update_one({"id":id}, {"$set":{"mission":newMission}})
-      if 250 <= newLaunchCount < 500:
-        newMission = "Geostationary Orbit"
-        horseyStats.update_one({"id":id}, {"$set":{"mission":newMission}})
-      if 500 <= newLaunchCount < 1000:
-        newMission = "High Earth Orbit"
-        horseyStats.update_one({"id":id}, {"$set":{"mission":newMission}})
-      if 1000 <= newLaunchCount < 2500:
-        newMission = "Lunar Orbit"
-        horseyStats.update_one({"id":id}, {"$set":{"mission":newMission}})
-      if 2500 <= newLaunchCount:
-        newMission = "L2 Orbit"
-        horseyStats.update_one({"id":id}, {"$set":{"mission":newMission}})
+      # Generate a hyperspace egg
+      shinyRoll = random.randint(1, 100)
+      if 1 <= shinyRoll <= 5:
+        newHScount = uStats["hyperspace eggs"] + 1
+        horseyStats.update_one({"id":id}, {"$set":{"hyperspace eggs":newHScount}})
+        shinyEmbed = discord.Embed(description="Horse found a **Hyperspace Egg**!")
+        await ctx.send(embed=shinyEmbed)
+
+      # Deduct one hyperspace egg if hsmode is on.
+      if uStats["hsmode"] == "true":
+        hsEggs = uStats["hyperspace eggs"]
+        uLaunches = uStats["launches"]
+        newHScount = hsEggs - 1
+        horseyStats.update_one({"id":id}, {"$set":{"hyperspace eggs":newHScount}})
+        
+      if newHScount == 0:
+        horseyStats.update_one({"id":id}, {"$set":{"hsmode":"false"}})
+  
+        normalMission = yeetUtil.returnHyperspace(uLaunches)
+  
+        horseyStats.update_one({"id":id}, {"$set":{"launches":uLaunches}})
+        horseyStats.update_one({"id":id}, {"$set":{"mission":str(normalMission)}})
+        await ctx.channel.send("You have run out of Hyperspace Eggs! Exiting **Hyperspace**.")
+
+      # Update current mission ONLY IF NOT IN HYPERSPACE
+      if currentMission != "Hyperspace":
+      
+        if 0 <= newLaunchCount < 25:
+          newMission = "Commercial Flight Altitude"
+          horseyStats.update_one({"id":id}, {"$set":{"mission":newMission}})
+        if 25 <= newLaunchCount < 50:
+          newMission = "Stratosphere"
+          horseyStats.update_one({"id":id}, {"$set":{"mission":newMission}})
+        if 50 <= newLaunchCount < 100:
+          newMission = "Kármán Line"
+          horseyStats.update_one({"id":id}, {"$set":{"mission":newMission}})
+        if 100 <= newLaunchCount < 250:
+          newMission = "Low Earth Orbit"
+          horseyStats.update_one({"id":id}, {"$set":{"mission":newMission}})
+        if 250 <= newLaunchCount < 500:
+          newMission = "Geostationary Orbit"
+          horseyStats.update_one({"id":id}, {"$set":{"mission":newMission}})
+        if 500 <= newLaunchCount < 1000:
+          newMission = "High Earth Orbit"
+          horseyStats.update_one({"id":id}, {"$set":{"mission":newMission}})
+        if 1000 <= newLaunchCount < 2500:
+          newMission = "Lunar Orbit"
+          horseyStats.update_one({"id":id}, {"$set":{"mission":newMission}})
+        if 2500 <= newLaunchCount:
+          newMission = "L2 Orbit"
+          horseyStats.update_one({"id":id}, {"$set":{"mission":newMission}})
       
       missionThe = ['Stratosphere', 'Kármán Line']
 

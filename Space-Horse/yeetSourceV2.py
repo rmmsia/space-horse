@@ -2,42 +2,18 @@ import random
 import math
  
 
-# class Mission:
-    #def __init__(self, misName, minQual, maxQual):
-        #self.misName = misName
-        #self.minQual = minQual
-        #self.maxQual = maxQual
 
-    #def getMinQual(self):
-        #return self.minQual
-
-    #def getMaxQual(self):
-        #return self.maxQual
-
-# Mission List
-
-# mis01 = Mission('Commercial Flight Altitude', 0, 4) # 0 launches
-# mis02 = Mission('Stratosphere', 1, 6) # 25 "
-# mis03 = Mission('Kármán line', 2, 8) # 50 "
-# mis04 = Mission('Low Earth Orbit', 3, 10) # 100 "
-# mis05 = Mission('Geostationary Orbit', 4, 12) # 250 "
-# mis06 = Mission('High Earth Orbit', 5, 14) # 500 "
-# mis07 = Mission('Lunar Orbit', 6, 16) # 1000 "
-# mis08 = Mission('L2 Orbit', 7, 18) # 2500 "
-
-# misHyper = Mission('Hyperspace', 14, 20) # Special
-
-# missionlist = {
-#     'Commercial Flight Altitude': {'minQual': 0, 'maxQual': 4},
-#     'Stratosphere': {'minQual': 1, 'maxQual': 6},
-#     'Kármán Line': {'minQual': 2, 'maxQual': 8},
-#     'Low Earth Orbit': {'minQual': 3, 'maxQual': 10},
-#     'Geostationary Orbit': {'minQual': 4, 'maxQual': 12},
-#     'High Earth Orbit': {'minQual': 5, 'maxQual': 14},
-#     'Lunar Orbit': {'minQual': 6, 'maxQual': 16},
-#     'L2 Orbit': {'minQual': 7, 'maxQual': 18},
-#     'Hyperspace': {'minQual': 14, 'maxQual': 20}
-#     }
+missionlist = {
+    'Commercial Flight Altitude': {'minQual': 0, 'maxQual': 4},
+    'Stratosphere': {'minQual': 1, 'maxQual': 6},
+    'Kármán Line': {'minQual': 2, 'maxQual': 8},
+    'Low Earth Orbit': {'minQual': 3, 'maxQual': 10},
+    'Geostationary Orbit': {'minQual': 4, 'maxQual': 12},
+    'High Earth Orbit': {'minQual': 5, 'maxQual': 14},
+    'Lunar Orbit': {'minQual': 6, 'maxQual': 16},
+    'L2 Orbit': {'minQual': 7, 'maxQual': 18},
+    'Hyperspace': {'minQual': 14, 'maxQual': 20}
+    }
 
 
 class Artifact:
@@ -86,7 +62,7 @@ artifactDict = {
 'artid22' : Artifact('T3', 'Rare', 'Demeters Necklace', 1, 5.8, 0.045),
 'artid23' : Artifact('T3', 'Epic', 'Demeters Necklace', 2, 5.8, 0.009),
 'artid24' : Artifact('T4', 'Common', 'Demeters Necklace', 0, 8.9, 0.900),
-'artid25' : Artifact('T4', 'Rare', 'Demeters Necklacee', 1, 8.9, 0.023),
+'artid25' : Artifact('T4', 'Rare', 'Demeters Necklace', 1, 8.9, 0.023),
 'artid26' : Artifact('T4', 'Epic', 'Demeters Necklace', 2, 8.9, 0.006),
 'artid27' : Artifact('T4', 'Legendary', 'Demeters Necklace', 3, 8.9, 0.0009),
 
@@ -285,7 +261,7 @@ artifactDict = {
 'artid167' : Artifact('T3', 'Rare', "Light of Eggendil", 1, 13.2, 0.090),
 'artid168' : Artifact('T4', 'Common', "Light of Eggendil", 0, 16.1, 0.900),
 'artid169' : Artifact('T4', 'Epic', "Light of Eggendil", 0, 16.1, 0.009),
-'artid170' : Artifact('T4', 'Legendary', "Light of Eggendil", 0, 16.1, 0.0009),
+'artid170' : Artifact('T4', 'Legendary', "Light of Eggendil", 0, 16.1, 0.0009)
 }
 def launch(currentMission):
   ######
@@ -293,44 +269,26 @@ def launch(currentMission):
 
   ## Choosing Mission
 
-  if currentMission == 'Commercial Flight Altitude':
-    minQual = 0
-    maxQual = 4
-  if currentMission == 'Stratosphere':
-    minQual = 1
-    maxQual = 6
-  if currentMission == 'Kármán Line':
-    minQual = 2
-    maxQual = 8
-  if currentMission == 'Low Earth Orbit':
-    minQual = 3
-    maxQual = 10
-  if currentMission == 'Geostationary Orbit':
-    minQual = 4
-    maxQual = 12
-  if currentMission == 'High Earth Orbit':
-    minQual = 5
-    maxQual = 14
-  if currentMission == 'Lunar Orbit':
-    minQual = 6
-    maxQual = 16
-  if currentMission == 'L2 Orbit':
-    minQual = 7
-    maxQual = 18
-  if currentMission == 'Hyperspace':
-    minQual = 14
-    maxQual = 20
+  for key in missionlist.keys():
+    if str(currentMission) == key:
+      minQual = missionlist[key]['minQual']
+      maxQual = missionlist[key]['maxQual']
+    else:
+      pass
   
   ## Collecting artifact pool (Determined by picking artifacts whose artQual)
   
   missionArtList = []
 
+  missionQual = round(random.uniform(minQual, maxQual), 2)
+
   for artifact in artifactDict.values():
-    missionQual = round(random.uniform(minQual, maxQual), 2)
+    qty = math.ceil(artifact.artChance * 1000)
     if minQual <= artifact.artQuality <= missionQual:
-      minArtQty = int(math.ceil(artifact.artChance * 1000))
-      for i in range(minArtQty + 1):
-        missionArtList.append(artifact.artTitle())
+      missionArtList.extend([artifact.artTitle()] * qty)
+    else:
+      pass
+    
   
   chosenArt = random.choice(missionArtList)
   returnMessage = f"Congratulations! Horse returned with a **{chosenArt}**!" # Welcome back to earth, Horse.
@@ -347,45 +305,25 @@ def shinylaunch(currentMission):
 
   ## Choosing Mission
 
-  if currentMission == 'Commercial Flight Altitude':
-    minQual = 0
-    maxQual = 4
-  if currentMission == 'Stratosphere':
-    minQual = 1
-    maxQual = 6
-  if currentMission == 'Kármán Line':
-    minQual = 2
-    maxQual = 8
-  if currentMission == 'Low Earth Orbit':
-    minQual = 3
-    maxQual = 10
-  if currentMission == 'Geostationary Orbit':
-    minQual = 4
-    maxQual = 12
-  if currentMission == 'High Earth Orbit':
-    minQual = 5
-    maxQual = 14
-  if currentMission == 'Lunar Orbit':
-    minQual = 6
-    maxQual = 16
-  if currentMission == 'L2 Orbit':
-    minQual = 7
-    maxQual = 18
-  if currentMission == 'Hyperspace':
-    minQual = 14
-    maxQual = 20
+  for key in missionlist.keys():
+    if str(currentMission) == key:
+      minQual = missionlist[key]['minQual']
+      maxQual = missionlist[key]['maxQual']
+    else:
+      pass
   
   ## Collecting artifact pool (Determined by picking artifacts whose artQual)
   
   missionArtList = []
+  missionQual = round(random.uniform(minQual, maxQual), 2)
 
   for artifact in artifactDict.values():
-    missionQual = round(random.uniform(minQual, maxQual), 2)
-    if minQual <= artifact.artQuality <= missionQual:
-      minArtQty = int(math.ceil(artifact.artChance * 1000))
-      if artifact.artRare != "Common":
-        for i in range(minArtQty + 1):
-          missionArtList.append(artifact.artTitle())
+    qty = math.ceil(artifact.artChance * 1000)
+    if artifact.artRare != "Common":
+      if minQual <= artifact.artQuality <= missionQual: 
+        missionArtList.extend([artifact.artTitle()] * qty)
+    else:
+      pass
   
   chosenArt = random.choice(missionArtList)
   returnMessage = f"Congratulations! Horse returned with a **{chosenArt}**!" # Welcome back to earth, Horse.
